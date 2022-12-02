@@ -1,6 +1,7 @@
 package com.example.csvUpload.serviceImpl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,53 +30,51 @@ public class CsvServiceImpl implements CsvService{
 		csvParser.setHeaderExtractionEnabled(true);
 		CsvParser par = new CsvParser(csvParser);
 		Iterable<Record> data = par.parseAllRecords(multipartFile.getInputStream());
-		for(Record r:data)
-		{
+		for(Record record:data) {
 			CsvModel csvModel=new CsvModel();
-			csvModel.setItemId(r.getString("Item Id"));
-			csvModel.setItemName(r.getString("Item Name"));
-			csvModel.setBrand(r.getString("brand"));
-			csvModel.setDimensionUnit(r.getString("dimensionUnit"));
-			csvModel.setEan(r.getString("ean"));
-			csvModel.setInventoryAccount(r.getString("inventoryAccount"));
-			csvModel.setIsbn(r.getString("isbn"));
-			csvModel.setIsComboProduct(r.getBoolean("isComboProduct"));
-			csvModel.setIsReturnableItem(r.getBoolean("isReturnableItem"));
-            csvModel.setItemType(r.getString("itemType"));
-            csvModel.setLastSyncTime(r.getString("lastSyncTime"));
-            csvModel.setManufacturer(r.getString("manufacturer"));
-            csvModel.setOpeningStock(r.getString("openingStock"));
-            csvModel.setOpeningStockValue(r.getString("openingStockValue"));
-            csvModel.setPackageHeight(r.getLong("packageHeight"));
-            csvModel.setPackageLength(r.getLong("packageLength"));
-            csvModel.setPackageWeight(r.getLong("packageWeight"));
-            csvModel.setPackageWidth(r.getLong("packageWidth"));
-            csvModel.setPartNumber(r.getLong("partNumber"));
-            csvModel.setPreferredVendor(r.getString("preferredVendor"));
-            csvModel.setProductTypes(r.getString("productTypes"));
-            csvModel.setPurchaseAccount(r.getString("purchaseAccount"));
-            csvModel.setPurchaseDescription(r.getString("purchaseDescription"));
-            csvModel.setPurchasePrice(r.getString("purchasePrice"));
-            csvModel.setRecoderLevel(r.getString("recoderLevel"));
-            csvModel.setReferanceId(r.getLong("referanceId"));
-            csvModel.setSalesAccount(r.getString("salesAccount"));
-            csvModel.setSalesDescription(r.getString("Sales Description"));
-            csvModel.setSellingPrice(r.getString("sellingPrice"));
-            csvModel.setSku(r.getString("sku"));
-            csvModel.setSource(r.getLong("source"));
-            csvModel.setStatus(r.getString("status"));
-            csvModel.setStockOnHand(r.getLong("stockOnHand"));
-            csvModel.setTaxName(r.getString("taxName"));
-            csvModel.setTaxPercentage(r.getLong("taxPercentage"));
-            csvModel.setTaxType(r.getString("taxType"));
-            csvModel.setUnit(r.getString("unit"));
-            csvModel.setUpc(r.getString("upc"));
-            csvModel.setWeightUnit(r.getString("weightUnit"));
+			csvModel.setItemId(record.getLong("ItemID"));
+			csvModel.setItemName(record.getString("Item Name"));
+			csvModel.setBrand(record.getString("Brand"));
+			csvModel.setDimensionUnit(record.getString("Dimension Unit"));
+			csvModel.setEan(record.getString("EAN"));
+			csvModel.setInventoryAccount(record.getString("Inventory Account"));
+			csvModel.setIsbn(record.getString("ISBN"));
+			csvModel.setIsComboProduct(record.getBoolean("Is Combo Product"));
+			csvModel.setIsReturnableItem(record.getBoolean("Is Returnable Item"));
+            csvModel.setItemType(record.getString("Item Type"));
+            csvModel.setLastSyncTime(record.getString("Last Sync Time"));
+            csvModel.setManufacturer(record.getString("Manufacturer"));
+            csvModel.setOpeningStock(record.getString("Opening Stock"));
+            csvModel.setOpeningStockValue(record.getString("Opening Stock Value"));
+            csvModel.setPackageHeight(record.getLong("Package Height"));
+            csvModel.setPackageLength(record.getLong("Package Length"));
+            csvModel.setPackageWeight(record.getLong("Package Weight"));
+            csvModel.setPackageWidth(record.getLong("Package Width"));
+            csvModel.setPartNumber(record.getLong("Part Number"));
+            csvModel.setPreferredVendor(record.getString("Preferred Vendor"));
+            csvModel.setProductTypes(record.getString("Product Type"));
+            csvModel.setPurchaseAccount(record.getString("Purchase Account"));
+            csvModel.setPurchaseDescription(record.getString("Purchase Description"));
+            csvModel.setPurchasePrice(record.getString("Purchase Price"));
+            csvModel.setRecoderLevel(record.getString("Reorder Level"));
+            csvModel.setReferanceId(record.getLong("Reference ID"));
+            csvModel.setSalesAccount(record.getString("Sales Account"));
+            csvModel.setSalesDescription(record.getString("Sales Description"));
+            csvModel.setSellingPrice(record.getString("Selling Price"));
+            csvModel.setSku(record.getString("SKU"));
+            csvModel.setSource(record.getLong("Source"));
+            csvModel.setStatus(record.getString("Status"));
+            csvModel.setStockOnHand(record.getLong("Stock On Hand"));
+            csvModel.setTaxName(record.getString("Tax Name"));
+            csvModel.setTaxPercentage(record.getLong("Tax Percentage"));
+            csvModel.setTaxType(record.getString("Tax Type"));
+            csvModel.setUnit(record.getString("Unit"));
+            csvModel.setUpc(record.getString("UPC"));
+            csvModel.setWeightUnit(record.getString("Weight Unit"));
             list.add(csvModel);
             
-            csvRepo.saveAll(list);
-            System.out.println(list);
 		}
+		csvRepo.saveAll(list);
 		return new ResponseEntity<>("uploaded file",HttpStatus.OK);
 	}
 

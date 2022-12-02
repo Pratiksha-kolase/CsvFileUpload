@@ -11,7 +11,9 @@ import javax.persistence.Table;
 public class CsvModel {
 
 	@Id
-	private String itemId;
+	
+	
+	private Long itemId;
     private String itemName;
     private String salesDescription;
     private String sellingPrice;
@@ -50,10 +52,10 @@ public class CsvModel {
     private Long stockOnHand;
     private Boolean isComboProduct;
     private String itemType;
-	public String getItemId() {
+	public Long getItemId() {
 		return itemId;
 	}
-	public void setItemId(String itemId) {
+	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
 	public String getItemName() {
@@ -284,24 +286,5 @@ public class CsvModel {
 	public void setItemType(String itemType) {
 		this.itemType = itemType;
 	}
-	@Override
-	public String toString() {
-		return "CsvModel [itemId=" + itemId + ", itemName=" + itemName + ", salesDescription=" + salesDescription
-				+ ", sellingPrice=" + sellingPrice + ", salesAccount=" + salesAccount + ", isReturnableItem="
-				+ isReturnableItem + ", brand=" + brand + ", manufacturer=" + manufacturer + ", packageWeight="
-				+ packageWeight + ", packageLength=" + packageLength + ", packageWidth=" + packageWidth
-				+ ", packageHeight=" + packageHeight + ", dimensionUnit=" + dimensionUnit + ", weightUnit=" + weightUnit
-				+ ", taxName=" + taxName + ", taxPercentage=" + taxPercentage + ", taxType=" + taxType
-				+ ", productTypes=" + productTypes + ", source=" + source + ", referanceId=" + referanceId
-				+ ", lastSyncTime=" + lastSyncTime + ", status=" + status + ", unit=" + unit + ", sku=" + sku + ", upc="
-				+ upc + ", ean=" + ean + ", isbn=" + isbn + ", partNumber=" + partNumber + ", purchasePrice="
-				+ purchasePrice + ", purchaseAccount=" + purchaseAccount + ", purchaseDescription="
-				+ purchaseDescription + ", inventoryAccount=" + inventoryAccount + ", recoderLevel=" + recoderLevel
-				+ ", preferredVendor=" + preferredVendor + ", openingStock=" + openingStock + ", openingStockValue="
-				+ openingStockValue + ", stockOnHand=" + stockOnHand + ", isComboProduct=" + isComboProduct
-				+ ", itemType=" + itemType + "]";
-	}
-    
-    
 
 }
